@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import * as THREE from 'three'
-const OrbitControls = require('three-orbitcontrols')
+import OrbitControls from 'three-orbitcontrols'
 
-class Others extends Component {
+class OrbitControlExample extends Component {
   componentDidMount() {
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
     
-
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(20, width / height, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     const geometry = new THREE.BoxGeometry(1, 1, 1)
-    const material = new THREE.MeshBasicMaterial({ color: 0xff00ff })
+    const material = new THREE.MeshBasicMaterial({ color: 0xff2200 })
     const cube = new THREE.Mesh(geometry, material)
-
-    const orbit = new OrbitControls( camera, renderer.domElement );
-    scene.add(orbit);
+    
+    var light = new THREE.PointLight( 0xffffff, 200, 100 );
+    light.position.set( 50, 50, 50 );
+    scene.add( light );
 
     camera.position.z = 4
 
@@ -25,13 +25,18 @@ class Others extends Component {
     renderer.setClearColor('#000000')
     renderer.setSize(width, height)
 
+    //set this. valuable
     this.scene = scene
     this.camera = camera
     this.renderer = renderer
     this.material = material
     this.cube = cube
 
+    //add orbit controller
+    const orbit = new OrbitControls( camera, renderer.domElement );
+    scene.add(orbit);
 
+    //response for changing window size
     window.addEventListener('resize', this.handleResize)
 
     this.mount.appendChild(this.renderer.domElement)
@@ -88,4 +93,4 @@ class Others extends Component {
   }
 }
 
-export default Others
+export default OrbitControlExample

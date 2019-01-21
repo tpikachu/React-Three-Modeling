@@ -3,78 +3,19 @@ import {ListGroup} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 class Drawbar extends Component {
   render() {
+    const active_path = window.location.hash;
+    console.log(active_path);
     return (
-        <ListGroup defaultActiveKey="/#Three/RotatingCube">
-            <ListGroup.Item action href="/#Three/RotatingCube">
+        <ListGroup defaultActiveKey={active_path}>
+            <ListGroup.Item action href="#Three/RotatingCube">
                 Rotating Cube
             </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Others">
-            Others
+
+            <ListGroup.Item action href="#Three/OrbitControlExample">
+                OrbitControlExample
             </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
-                Sample
-            </ListGroup.Item>
-            <ListGroup.Item action href="/#Three/Sample">
+
+            <ListGroup.Item action href="#Three/Sample">
                 Sample
             </ListGroup.Item>
         </ListGroup> 

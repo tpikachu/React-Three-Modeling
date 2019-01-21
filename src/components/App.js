@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button , Container, Row, Col} from 'react-bootstrap';
+import {  Row, Col} from 'react-bootstrap';
 
 import Drawbar from './Drawbar/Drawbar';
 import Appbar from './Appbar/Appbar';
@@ -11,11 +11,11 @@ class App extends Component {
       <div>
         <Appbar/>
         <Row style={{margin:'20px'}}>
-          <Col md={4} style={{height:"calc(100vh - 100px)",overflow: 'auto'}}>
+          <Col md={3} style={{height:"calc(100vh - 100px)",overflow: 'auto'}}>
             <Drawbar/>
           </Col>
 
-          <Col md={8}>
+          <Col md={9}>
             <div className='Container' style={{background:'black'}}>
                 {this.props.children}
             </div>

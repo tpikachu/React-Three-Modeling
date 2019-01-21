@@ -15,20 +15,6 @@
 }
 
 
-.App-link {
-  color: #61dafb;
-}
-
-    .btn-flat {
-      background-color: purple;
-      color: white;
-    }
-
-    .btn-xxl {
-      padding: 1rem 1.5rem;
-      font-size: 1.5rem;
-    }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

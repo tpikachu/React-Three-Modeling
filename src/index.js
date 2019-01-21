@@ -6,7 +6,7 @@ import {Switch, Route, HashRouter} from 'react-router-dom';
 import './index.css';
 //components
 import App from './components/App';
-import Others from './components/Three/Others/Others';
+import OrbitControlExample from './components/Three/OrbitControlExample/OrbitControlExample';
 import RotatingCube from './components/Three/RotatingCube/RotatingCube'
 /*
     <IndexRoute component={Home}/>
@@ -21,7 +21,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component= {RotatingCube} />
                 <Route path="/Three/RotatingCube" component= {RotatingCube} />
-                <Route path="/Three/Others" component= {Others} />
+                <Route path="/Three/OrbitControlExample" component= {OrbitControlExample} />
             </Switch>
         </App>
     </HashRouter>
