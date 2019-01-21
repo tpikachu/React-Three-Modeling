@@ -8,6 +8,9 @@ import './index.css';
 import App from './components/App';
 import OrbitControlExample from './components/Three/OrbitControlExample/OrbitControlExample';
 import RotatingCube from './components/Three/RotatingCube/RotatingCube'
+import TextureLoaderExample from './components/Three/TextureLoaderExample/TextureLoaderExample'
+
+
 /*
     <IndexRoute component={Home}/>
     <Route path="/repos" component={Repos}>
@@ -22,6 +25,8 @@ ReactDOM.render(
                 <Route exact path="/" component= {RotatingCube} />
                 <Route path="/Three/RotatingCube" component= {RotatingCube} />
                 <Route path="/Three/OrbitControlExample" component= {OrbitControlExample} />
+                <Route path="/Three/TextureLoaderExample" component= {TextureLoaderExample} />
+                
             </Switch>
         </App>
     </HashRouter>

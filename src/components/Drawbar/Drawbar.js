@@ -15,8 +15,8 @@ class Drawbar extends Component {
                 OrbitControlExample
             </ListGroup.Item>
 
-            <ListGroup.Item action href="#Three/Sample">
-                Sample
+            <ListGroup.Item action href="#Three/TextureLoaderExample">
+                TextureLoaderExample
             </ListGroup.Item>
         </ListGroup> 
     );
