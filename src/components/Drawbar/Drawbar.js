@@ -1,29 +1,87 @@
 import React, { Component } from 'react';
-import {ListGroup} from 'react-bootstrap';
-import {NavLink} from 'react-router-dom';
+import {ListGroup, Collapse} from 'react-bootstrap';
 class Drawbar extends Component {
-  render() {
-    const active_path = window.location.hash;
-    console.log(active_path);
-    return (
-        <ListGroup defaultActiveKey={active_path}>
-            <ListGroup.Item action href="#Three/RotatingCube">
-                Rotating Cube
-            </ListGroup.Item>
+    constructor(props)
+    {
+        super(props);
 
-            <ListGroup.Item action href="#Three/OrbitControlExample">
-                OrbitControlExample
-            </ListGroup.Item>
+        this.state = {
+            toggled_key: '',
+        }
 
-            <ListGroup.Item action href="#Three/TextureLoaderExample">
-                TextureLoaderExample
-            </ListGroup.Item>
+        this.clicklisthandle = this.clicklisthandle.bind(this);
+    }
+    clicklisthandle(event)
+    {
+        if(this.state.toggled_key === event.target.value)
+            this.setState({toggled_key:''});
+        else
+            this.setState({toggled_key:event.target.value})
+    }
+    clickanitem(event)
+    {
+        window.location = `#Three/${event.target.value}`
+    }
+    render() {
+        const active_path = window.location.hash;
+        return (
+            <ListGroup defaultActiveKey={active_path}>           
+                
+                <ListGroup.Item action onClick={this.clicklisthandle} variant='success' value={'Simple'}>
+                    +Simple Exmaples
+                </ListGroup.Item>
+                
+                <Collapse in={this.state.toggled_key === 'Simple'}>
+                    <div>
+                        <ListGroup defaultActiveKey={active_path}>
+                            <ListGroup.Item action onClick={this.clickanitem} value='RotatingCube'>
+                                Rotating Cube
+                            </ListGroup.Item>
+                            <ListGroup.Item action onClick={this.clickanitem} value='GroupExample'>
+                                GroupExample
+                            </ListGroup.Item>
+                        </ListGroup>
+                    </div>
+                </Collapse>
 
-            <ListGroup.Item action href="#Three/ObjectLoaderExample">
-                ObjectLoaderExample
-            </ListGroup.Item>
-        </ListGroup> 
-    );
-  }
+
+                <ListGroup.Item action onClick={this.clicklisthandle} variant='success' value={'Loader'}>
+                    +Loader Exmaples
+                </ListGroup.Item>
+                
+                <Collapse in={this.state.toggled_key === 'Loader'}>
+                    <div>
+                        <ListGroup defaultActiveKey={active_path}>
+                            <ListGroup.Item action onClick={this.clickanitem} value='TextureLoaderExample'>
+                                TextureLoaderExample
+                            </ListGroup.Item>
+                            <ListGroup.Item action onClick={this.clickanitem} value='GLTFLoaderExample'>
+                                GLTFLoaderExample
+                            </ListGroup.Item>
+                            
+                            <ListGroup.Item action onClick={this.clickanitem} value='ObjectLoaderExample'>
+                                ObjectLoaderExample
+                            </ListGroup.Item>
+                        </ListGroup>
+                    </div>
+                </Collapse>
+
+                <ListGroup.Item action onClick={this.clicklisthandle} variant='success' value={'Control'}>
+                    +Control Exmaples
+                </ListGroup.Item>
+                
+                <Collapse in={this.state.toggled_key === 'Control'}>
+                    <div>
+                        <ListGroup defaultActiveKey={active_path}>
+                            <ListGroup.Item action onClick={this.clickanitem} value='OrbitControlExample'>
+                                OrbitControlExample
+                            </ListGroup.Item>
+                        </ListGroup>
+                    </div>
+                </Collapse>
+                
+            </ListGroup> 
+        );
+    }
 }
 export default Drawbar;

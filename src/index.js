@@ -6,10 +6,20 @@ import {Switch, Route, HashRouter} from 'react-router-dom';
 import './index.css';
 //components
 import App from './components/App';
-import RotatingCube from './components/Three/RotatingCube/RotatingCube'
-import OrbitControlExample from './components/Three/OrbitControlExample/OrbitControlExample'
-import TextureLoaderExample from './components/Three/TextureLoaderExample/TextureLoaderExample'
-import ObjectLoaderExample from './components/Three/ObjectLoaderExample/ObjectLoaderExample'
+import NotFound from './components/NotFound/NotFound'
+
+//SimpleExamples
+import RotatingCube from './components/Three/SimpleExamples/RotatingCube'
+import GroupExample from './components/Three/SimpleExamples/GroupExample'
+
+//ControlExamples
+import OrbitControlExample from './components/Three/ControlExamples/OrbitControlExample'
+
+//LoaderExamples
+import TextureLoaderExample from './components/Three/LoaderExamples/TextureLoaderExample'
+import ObjectLoaderExample from './components/Three/LoaderExamples/ObjectLoaderExample'
+import GLTFLoaderExample from './components/Three/LoaderExamples/GLTFLoaderExample'
+
 ReactDOM.render(
     <HashRouter hashType="noslash">
         <App>
@@ -19,6 +29,9 @@ ReactDOM.render(
                 <Route path="/Three/OrbitControlExample" component= {OrbitControlExample} />
                 <Route path="/Three/TextureLoaderExample" component= {TextureLoaderExample} />
                 <Route path="/Three/ObjectLoaderExample" component= {ObjectLoaderExample} />
+                <Route path="/Three/GLTFLoaderExample" component= {GLTFLoaderExample} />
+                <Route path="/Three/GroupExample" component= {GroupExample} />
+                
             </Switch>
         </App>
     </HashRouter>
