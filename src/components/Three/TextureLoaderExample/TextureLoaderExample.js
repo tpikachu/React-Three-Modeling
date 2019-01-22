@@ -25,24 +25,17 @@ class TextureLoaderExample extends Component {
     //geometry
     const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
     
-    //add Directlight
-    var dirLight = new THREE.DirectionalLight( 0xffffff, 2 );
-            dirLight.color.setHSL( 0.1, 1, 0.95 );
-            dirLight.position.set( - 1, 1.75, 1 );
-            dirLight.position.multiplyScalar( 30 );
-            scene.add( dirLight );
-            dirLight.castShadow = true;
-            dirLight.shadow.mapSize.width = 2048;
-            dirLight.shadow.mapSize.height = 2048;
-    var d = 50;
-            dirLight.shadow.camera.left = - d;
-            dirLight.shadow.camera.right = d;
-            dirLight.shadow.camera.top = d;
-            dirLight.shadow.camera.bottom = - d;
-            dirLight.shadow.camera.far = 3500;
-            dirLight.shadow.bias = - 0.0001;
-    var	dirLightHeper = new THREE.DirectionalLightHelper( dirLight, 10 );
-            scene.add( dirLightHeper );
+    //add light
+    const ambientLight = new THREE.AmbientLight( 0xffffff, 1 );
+    scene.add( ambientLight );
+
+    const frontLight = new THREE.DirectionalLight( 0xffffff, 1 );
+    frontLight.position.set( 10, 10, 10 );
+
+    const backLight = new THREE.DirectionalLight( 0xffffff, 1 );
+    backLight.position.set( -10, 10, -10 );
+
+    scene.add( frontLight, backLight );
 
 
     //Load model
@@ -71,6 +64,7 @@ class TextureLoaderExample extends Component {
 
     this.mount.appendChild(this.renderer.domElement)
     this.start()
+    console.log(this.scene);
   }
 
   componentWillUnmount() {
