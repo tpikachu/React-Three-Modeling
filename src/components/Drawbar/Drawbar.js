@@ -18,6 +18,10 @@ class Drawbar extends Component {
             <ListGroup.Item action href="#Three/TextureLoaderExample">
                 TextureLoaderExample
             </ListGroup.Item>
+
+            <ListGroup.Item action href="#Three/ObjectLoaderExample">
+                ObjectLoaderExample
+            </ListGroup.Item>
         </ListGroup> 
     );
   }

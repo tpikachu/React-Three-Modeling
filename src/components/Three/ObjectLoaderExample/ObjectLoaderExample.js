@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import * as THREE from 'three'
 import OrbitControls from 'three-orbitcontrols'
+import {MTLLoader, OBJLoader} from 'three-obj-mtl-loader'
 
                 
-class TextureLoaderExample extends Component {
+class ObjectLoaderExample extends Component {
   componentDidMount() {
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
@@ -13,20 +14,16 @@ class TextureLoaderExample extends Component {
     scene.background = new THREE.Color( 0x8FBCD4 );
 
     //camera
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(10, width / height, 0.1, 2000)
     camera.position.z = 4
 
     //renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(width, height)
     renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setClearColor('#000000')
-
-    //geometry
-    const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
     
     //add light
-    const ambientLight = new THREE.AmbientLight( 0xffffff, 1 );
+    const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
     scene.add( ambientLight );
 
     const frontLight = new THREE.DirectionalLight( 0xffffff, 1 );
@@ -38,16 +35,15 @@ class TextureLoaderExample extends Component {
     scene.add( frontLight, backLight );
 
 
-    //Load Texture
-    const texture = new THREE.TextureLoader().load( 'textures/texture.jpg' );
-    texture.anisotropy = 16;
-    
-    // create a Standard material using the texture we just loaded as a color map
-    const material = new THREE.MeshStandardMaterial( {
-        map: texture,
-    } );
-    const mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    //Load model
+    new MTLLoader().load('models/bench.mtl', (materials) => {
+        materials.preload()
+        const objLoader = new OBJLoader();
+        objLoader.setMaterials(materials)
+        objLoader.load('models/bench.obj', (object) => {
+          scene.add(object)
+        })
+      })
 
     //add orbit
     const orbit = new OrbitControls( camera, renderer.domElement );
@@ -58,7 +54,7 @@ class TextureLoaderExample extends Component {
     this.scene = scene
     this.camera = camera
     this.renderer = renderer
-    this.mesh = mesh
+    
     //response for changing window size
     window.addEventListener('resize', this.handleResize)
 
@@ -94,9 +90,6 @@ class TextureLoaderExample extends Component {
   }
 
   animate = () => {
-    this.mesh.rotation.x += 0.01
-    this.mesh.rotation.y += 0.01
-
     this.renderScene()
     this.frameId = window.requestAnimationFrame(this.animate)
   }
@@ -117,4 +110,4 @@ class TextureLoaderExample extends Component {
   }
 }
 
-export default TextureLoaderExample
+export default ObjectLoaderExample
