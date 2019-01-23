@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Row, Col} from 'react-bootstrap';
+import {  Row, Col, Container} from 'react-bootstrap';
 
 import Drawbar from './Drawbar/Drawbar';
 import Appbar from './Appbar/Appbar';
@@ -8,7 +8,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div>
+      <Container fluid={true} style={{padding:'0px'}}>
         <Appbar/>
         <Row style={{margin:'20px'}}>
           <Col md={3} style={{height:"calc(100vh - 100px)",overflow: 'auto'}}>
@@ -16,12 +16,12 @@ class App extends Component {
           </Col>
 
           <Col md={9}>
-            <div className='Container' style={{background:'black'}}>
+            <Container fluid={true}>
                 {this.props.children}
-            </div>
+            </Container>
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }

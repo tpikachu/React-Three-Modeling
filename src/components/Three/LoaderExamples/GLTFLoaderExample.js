@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import GLTFLoader from 'three-gltf-loader';
 import OrbitControls from 'three-orbitcontrols'
 
-
+import {MTLLoader, OBJLoader} from 'three-obj-mtl-loader'
 
                 
 class GLTFLoaderExample extends Component {
@@ -13,8 +13,8 @@ class GLTFLoaderExample extends Component {
         let width = this.mount.clientWidth
         let height = this.mount.clientHeight
 
-        let camera = new THREE.PerspectiveCamera(35, width / height, 1, 1000)
-        camera.position.set( -50, 50, 200 );
+        let camera = new THREE.PerspectiveCamera(40, width / height, 1, 2000)
+        camera.position.set( -10, 10, 30 );
 
         this.camera = camera
     }
@@ -29,7 +29,17 @@ class GLTFLoaderExample extends Component {
 
         // A reusable function to set up the models. We're passing in a position parameter
         // so that they can be individually placed around the scene
-        
+        new MTLLoader().load('models/bench.mtl', (materials) => {
+            materials.preload()
+            let objLoader = new OBJLoader();
+            objLoader.setMaterials(materials)
+            objLoader.load('models/bench.obj', (object) => {
+                object.scale.set(10, 10, 10)
+                object.position.copy(new THREE.Vector3( 0, -0, 0 ))
+            this.scene.add(object)
+            })
+        })
+
         let loader = new GLTFLoader();
 
         loader.load(
@@ -37,7 +47,11 @@ class GLTFLoaderExample extends Component {
             ( gltf ) => {
                 // called when the resource is loaded
                 const model = gltf.scene.children[ 0 ];
-                model.position.copy(new THREE.Vector3( 0, -200, 0 ))
+                
+                console.log(model);
+                model.scale.set(0.05, 0.05, 0.05)
+                model.position.copy(new THREE.Vector3( -5, 0, 0 ))
+                
 
                 const animation = gltf.animations[ 0 ];
 
@@ -61,16 +75,16 @@ class GLTFLoaderExample extends Component {
     }
     initLight()
     {
-        let ambientLight = new THREE.AmbientLight( 0xffffff, 10 );
+        let ambientLight = new THREE.AmbientLight( 0xffffff, 1 );
         this.scene.add( ambientLight );
 
-        let frontLight = new THREE.DirectionalLight( 0xffffff, 100 );
-        frontLight.position.set( 50, 50, 150 );
+        let frontLight = new THREE.DirectionalLight( 0xffffff, 1 );
+        frontLight.position.set( 20, 20, 150 );
         var helperf = new THREE.DirectionalLightHelper( frontLight, 5 );
         this.scene.add( helperf );
 
-        let backLight = new THREE.DirectionalLight( 0xffffff, 100 );
-        backLight.position.set( -50, 50, -150 );
+        let backLight = new THREE.DirectionalLight( 0xff0000, 1 );
+        backLight.position.set( -20, 20, -150 );
         var helperb = new THREE.DirectionalLightHelper( backLight, 5 );
         this.scene.add( helperb );
 
@@ -92,8 +106,8 @@ class GLTFLoaderExample extends Component {
     initController()
     {
         //add orbit
-        let orbit = new OrbitControls( this.camera, this.renderer.domElement );
-        this.scene.add(orbit);
+        //let orbit = new OrbitControls( this.camera, this.renderer.domElement );
+        //this.scene.add(orbit);
     }
     componentDidMount() {
         this.mixers = [];

@@ -20,6 +20,7 @@ import TextureLoaderExample from './components/Three/LoaderExamples/TextureLoade
 import ObjectLoaderExample from './components/Three/LoaderExamples/ObjectLoaderExample'
 import GLTFLoaderExample from './components/Three/LoaderExamples/GLTFLoaderExample'
 
+import ShopBrowser from './components/Three/ShopBrowser/ShopBrowser'
 ReactDOM.render(
     <HashRouter hashType="noslash">
         <App>
@@ -31,7 +32,7 @@ ReactDOM.render(
                 <Route path="/Three/ObjectLoaderExample" component= {ObjectLoaderExample} />
                 <Route path="/Three/GLTFLoaderExample" component= {GLTFLoaderExample} />
                 <Route path="/Three/GroupExample" component= {GroupExample} />
-                
+                <Route path="/Three/ShopBrowser" component= {ShopBrowser} />
             </Switch>
         </App>
     </HashRouter>

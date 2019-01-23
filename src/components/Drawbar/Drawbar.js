@@ -80,6 +80,10 @@ class Drawbar extends Component {
                     </div>
                 </Collapse>
                 
+
+                <ListGroup.Item action onClick={this.clickanitem} value='ShopBrowser'>
+                    ShopBrowser
+                </ListGroup.Item>
             </ListGroup> 
         );
     }
