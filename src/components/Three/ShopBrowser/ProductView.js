@@ -1,87 +1,140 @@
 import React, { Component } from 'react'
 import * as THREE from 'three'
+import OrbitControls from 'three-orbitcontrols'
+import {MTLLoader, OBJLoader} from 'three-obj-mtl-loader'
 
+                
 class ProductView extends Component {
-  componentDidMount() {
-    let width = this.mount.clientWidth
-    let height = this.mount.clientHeight
+  
     
+    initCamera()
+    {
+        let width = this.mount.clientWidth
+        let height = this.mount.clientHeight
 
-    let scene = new THREE.Scene()
-    let camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
-    let renderer = new THREE.WebGLRenderer({ alpha: true ,antialias: true })
-    let geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-    let material = new THREE.MeshBasicMaterial({ color: 0xff00ff })
-    let cube = new THREE.Mesh(geometry, material)
+        let camera = new THREE.PerspectiveCamera(2, width / height, 0.1, 2000)
+        camera.position.set( -50, 50, 150 );
 
-    camera.position.z = 4
-
-    scene.add(cube)
-
-    renderer.setClearColor(0xffffff, 0)
-    renderer.setSize(width, height)
-
-    this.scene = scene
-    this.camera = camera
-    this.renderer = renderer
-    this.material = material
-    this.cube = cube
-
-
-    window.addEventListener('resize', this.handleResize)
-
-    this.mount.appendChild(this.renderer.domElement)
-    this.start()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize',  this.handleResize)
-    this.stop()
-    this.mount.removeChild(this.renderer.domElement)
-  }
-
-  handleResize = () => {
-    
-    let width = this.mount.clientWidth
-    let height = this.mount.clientHeight
-    
-    this.renderer.setSize(width, height)
-    this.camera.aspect = width / height
-    this.camera.updateProjectionMatrix()
-  }
-
-  start = () => {
-    if (!this.frameId) {
-      this.frameId = requestAnimationFrame(this.animate)
+        this.camera = camera
     }
-  }
+    initScene()
+    {
+        let scene = new THREE.Scene()
+      
 
-  stop = () => {
-    cancelAnimationFrame(this.frameId)
-  }
+        this.scene = scene
+    }
+    loadModels()
+    {
+      console.log(this.scene);
+        let url = this.props.model_url;        
+        this.scene.remove(this.scene.children[3]);
+        //Load model
+        new MTLLoader().load(`models/${url}.mtl`, (materials) => {
+            materials.preload()
+            const objLoader = new OBJLoader();
+            objLoader.setMaterials(materials)
+            objLoader.load(`models/${url}.obj`, (object) => {
+            this.scene.add(object)
+            })
+        })
+    }
+    initLight()
+    {
+        let ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
+        this.scene.add( ambientLight );
 
-  animate = () => {
-    this.cube.rotation.x += 0.01
-    this.cube.rotation.y += 0.01
+        let frontLight = new THREE.DirectionalLight( 0xffffff, 1 );
+        frontLight.position.set( 10, 10, 10 );
 
-    this.renderScene()
-    this.frameId = window.requestAnimationFrame(this.animate)
-  }
+        let backLight = new THREE.DirectionalLight( 0xffffff, 1 );
+        backLight.position.set( -10, 10, -10 );
 
-  renderScene = () => {
-    this.renderer.render(this.scene, this.camera)
-  }
+        this.scene.add( frontLight, backLight );
+    }
+    initRenderer()
+    {
+        let width = this.mount.clientWidth
+        let height = this.mount.clientHeight
 
-  render() {
-    return (
-      <div
-        style={{ width: '100%', height: 'calc(100vh - 100px)'}}
-        ref={mount => {
-          this.mount = mount
-        }}
-      />
-    )
-  }
+        let renderer = new THREE.WebGLRenderer({ alpha:true })
+        renderer.setSize(width, height)
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        this.renderer = renderer
+    }
+
+    initController()
+    {
+        //add orbit
+        let orbit = new OrbitControls( this.camera, this.renderer.domElement );
+        this.scene.add(orbit);
+    }
+    componentDidMount() {
+
+        this.initCamera()
+        this.initScene()
+        this.initLight()
+        this.initRenderer()
+        this.initController()
+        this.loadModels()
+        //response for changing window size
+        window.addEventListener('resize', this.handleResize)
+
+        this.mount.appendChild(this.renderer.domElement)
+        this.start()
+    }
+
+    componentDidUpdate()
+    {
+      this.loadModels();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize',  this.handleResize)
+        this.stop()
+        this.mount.removeChild(this.renderer.domElement)
+    }
+
+    handleResize = () => {
+        
+        let width = this.mount.clientWidth
+        let height = this.mount.clientHeight
+        
+        this.renderer.setSize(width, height)
+        this.camera.aspect = width / height
+        this.camera.updateProjectionMatrix()
+    }
+
+    start = () => {
+        if (!this.frameId) {
+        this.frameId = requestAnimationFrame(this.animate)
+        }
+    }
+
+    stop = () => {
+        cancelAnimationFrame(this.frameId)
+    }
+
+    animate = () => {
+        this.renderScene()
+        this.frameId = window.requestAnimationFrame(this.animate)
+    }
+
+    renderScene = () => {
+        this.renderer.render(this.scene, this.camera)
+    }
+
+    render() {
+        return (
+        <div
+            style={{ width: '100%', height: 'calc(100vh - 100px)' }}
+            ref={mount => {
+            this.mount = mount
+            }}
+        />
+        )
+    }
 }
 
 export default ProductView

@@ -9,17 +9,24 @@ class ShopBrowser extends Component {
     super(props)
 
     this.state = {
-      shoe_id:''
+      model_url:'',
+      product_list:''
     }
     this.clickhandldeshoe = this.clickhandldeshoe.bind(this);
   }
-  clickhandldeshoe(shoe_id){
-    console.log(shoe_id);
+  componentDidMount(){
+    /*
+    fetch('./product.json')
+      .then(data => this.setState({ product_list: data }));*/
+  }
+  clickhandldeshoe(model_url){
+    
     this.setState({
-      shoe_id:shoe_id
+      model_url:model_url
     })
   }
   render() {
+    console.log(this.state.product_list);
     return (
       <Container fluid={true}>
         <ProductsTab handle={this.clickhandldeshoe}/>
@@ -27,7 +34,7 @@ class ShopBrowser extends Component {
         <Row>
           <Col md={9}>
             <Container fluid={true} style={{background:'transparent'}}>
-              <ProductView shoe_id={this.state.shoe_id}/>
+              <ProductView model_url={this.state.model_url}/>
             </Container>
           </Col>
         </Row>

@@ -20,10 +20,10 @@ class ProductsTab extends Component {
         return (
             <ListGroup>
                 <ListGroup.Item action onClick={this.clickanitem}>
-                    shoe1
+                    bench
                 </ListGroup.Item>
                 <ListGroup.Item action onClick={this.clickanitem}>
-                    shoe2
+                  treePineSnowRound
                 </ListGroup.Item>
             </ListGroup> 
         );
