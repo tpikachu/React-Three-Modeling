@@ -12,7 +12,7 @@ class ProductView extends Component {
         let width = this.mount.clientWidth
         let height = this.mount.clientHeight
 
-        let camera = new THREE.PerspectiveCamera(2, width / height, 0.1, 2000)
+        let camera = new THREE.PerspectiveCamera(20, width / height, 0.1, 2000)
         camera.position.set( -50, 50, 150 );
 
         this.camera = camera
@@ -24,20 +24,22 @@ class ProductView extends Component {
 
         this.scene = scene
     }
-    loadModels()
+    async loadModels()
     {
-      console.log(this.scene);
+        console.log(this.scene);
         let url = this.props.model_url;        
         this.scene.remove(this.scene.children[3]);
         //Load model
-        new MTLLoader().load(`models/${url}.mtl`, (materials) => {
+        new MTLLoader().load(`models/shoes/${url}.mtl`, (materials) => {
             materials.preload()
             const objLoader = new OBJLoader();
             objLoader.setMaterials(materials)
-            objLoader.load(`models/${url}.obj`, (object) => {
-            this.scene.add(object)
+            objLoader.load(`models/shoes/${url}.obj`, (object) => {
+                console.log("hello");
+                this.scene.add(object)
             })
         })
+        console.log("world");
     }
     initLight()
     {
@@ -87,7 +89,7 @@ class ProductView extends Component {
 
     componentDidUpdate()
     {
-      this.loadModels();
+        this.loadModels();
     }
 
     componentWillUnmount() {

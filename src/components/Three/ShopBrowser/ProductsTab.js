@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {ListGroup, Media} from 'react-bootstrap';
+import {ListGroup, Media, Container, Row, Col, Image} from 'react-bootstrap';
+import './ProductTab.css';
 class ProductsTab extends Component {
     constructor(props)
     {
@@ -14,18 +15,24 @@ class ProductsTab extends Component {
 
     clickanitem(event)
     {
-      this.props.handle(event.target.innerHTML);
+        console.log(event.target.id);
+      this.props.handle(event.target.id);
     }
     render() {
         return (
-            <ListGroup>
-                <ListGroup.Item action onClick={this.clickanitem}>
-                    bench
-                </ListGroup.Item>
-                <ListGroup.Item action onClick={this.clickanitem}>
-                  treePineSnowRound
-                </ListGroup.Item>
-            </ListGroup> 
+            <Container style={{overflowX:'auto', whitespace:'nowrap', maxHeight:'100px',background:'black'}}>
+                <Row style={{justifyContent:'center'}}>
+                    <Image src="models/shoes/shoe-1.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-1'}/>
+                    <Image src="models/shoes/shoe-2.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-2'}/>
+                    <Image src="models/shoes/shoe-3.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-3'}/>
+                    <Image src="models/shoes/shoe-1.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-1'}/>
+                    <Image src="models/shoes/shoe-2.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-2'}/>
+                    <Image src="models/shoes/shoe-3.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-3'}/>
+                    <Image src="models/shoes/shoe-1.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-1'}/>
+                    <Image src="models/shoes/shoe-2.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-2'}/>
+                    <Image src="models/shoes/shoe-3.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-3'}/>
+                </Row>
+            </Container>
         );
     }
 }
