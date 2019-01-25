@@ -5,10 +5,8 @@ import {MTLLoader, OBJLoader} from 'three-obj-mtl-loader'
 
                 
 class ProductView extends Component {
-  
     
-    initCamera()
-    {
+    initCamera = () => {
         let width = this.mount.clientWidth
         let height = this.mount.clientHeight
 
@@ -17,15 +15,13 @@ class ProductView extends Component {
 
         this.camera = camera
     }
-    initScene()
-    {
+    initScene = () => {
         let scene = new THREE.Scene()
       
 
         this.scene = scene
     }
-    async loadModels()
-    {
+    loadModels = () => {
         console.log(this.scene);
         let url = this.props.model_url;        
         this.scene.remove(this.scene.children[3]);
@@ -41,8 +37,7 @@ class ProductView extends Component {
         })
         console.log("world");
     }
-    initLight()
-    {
+    initLight = () => {
         let ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
         this.scene.add( ambientLight );
 
@@ -54,8 +49,7 @@ class ProductView extends Component {
 
         this.scene.add( frontLight, backLight );
     }
-    initRenderer()
-    {
+    initRenderer = () => {
         let width = this.mount.clientWidth
         let height = this.mount.clientHeight
 
@@ -66,8 +60,7 @@ class ProductView extends Component {
         this.renderer = renderer
     }
 
-    initController()
-    {
+    initController= () => {
         //add orbit
         let orbit = new OrbitControls( this.camera, this.renderer.domElement );
         this.scene.add(orbit);

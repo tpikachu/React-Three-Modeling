@@ -28,17 +28,13 @@ class ShopBrowser extends Component {
   render() {
     console.log(this.state.product_list);
     return (
-      <Container fluid={true} style={{background:'black'}}>
+      <div style={{background:'black'}}>
         <ProductsTab handle={this.clickhandldeshoe}/>
 
         <Row>
-          
-            <Container fluid={true} >
-              <ProductView model_url={this.state.model_url}/>
-            </Container>
-          
+          <ProductView model_url={this.state.model_url}/>
         </Row>
-      </Container>
+      </div>
     );
   }
 }

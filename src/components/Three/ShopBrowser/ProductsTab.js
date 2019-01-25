@@ -20,7 +20,7 @@ class ProductsTab extends Component {
     }
     render() {
         return (
-            <Container style={{overflowX:'auto', whitespace:'nowrap', maxHeight:'100px',background:'black'}}>
+            <div className={'lists'}>
                 <Row style={{justifyContent:'center'}}>
                     <Image src="models/shoes/shoe-1.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-1'}/>
                     <Image src="models/shoes/shoe-2.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-2'}/>
@@ -32,7 +32,7 @@ class ProductsTab extends Component {
                     <Image src="models/shoes/shoe-2.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-2'}/>
                     <Image src="models/shoes/shoe-3.png" roundedCircle className={'item'} style={{display:'inline-block'}} onClick={this.clickanitem} id={'nike-3'}/>
                 </Row>
-            </Container>
+            </div>
         );
     }
 }
